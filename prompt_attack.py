@@ -358,11 +358,8 @@ def diffattack(
     pred = classifier(test_image.cuda())
     _, pred_labels = pred.topk(topN, largest=True, sorted=True)
 
-    with open('descriptions.txt', 'r') as file:
+    with open('Prompts/00-10_tokens.txt', 'r') as file:
         descriptions = file.readlines()
-
-    if len(descriptions) != 1000:
-        raise ValueError("Descriptions file must contain exactly 1000 lines.")
 
     _, pred_labels = pred.topk(topN, largest=True, sorted=True)
     target_prompt = " ".join([descriptions[label.item()].strip() for label in pred_labels[1:topN]])
