@@ -9,7 +9,7 @@ LOCAL_MODEL_PATH = "Qwen3-VL-8B-Instruct"
 image_dir = "dataset/images"
 label_file = "dataset/labels.txt"
 imagenet_json_path = "dataset/imagenet_class_index.json"
-output_base_dir = "Text"
+output_base_dir = "Prompts"
 
 os.makedirs(output_base_dir, exist_ok=True)
 
@@ -51,34 +51,19 @@ except ValueError:
 
 buckets_stages = [
     {
-        "name": "00-10_tokens",
-        "instruction": "Describe the {class_name} in the image. Be extremely concise. Limit the response to 10 words.",
-        "max_new": 20
+        "name": "02-10_tokens",
+        "instruction": "Describe the {class_name} in the image. Be extremely concise. The total length must be between 2 and 10 tokens.",
+        "max_new": 10
     },
     {
-        "name": "10-20_tokens",
-        "instruction": "Based on this description: '{prev}', rewrite and expand it to describe the main action or placement of the object. The total length must be between 10 and 20 words.",
+        "name": "10-30_tokens",
+        "instruction": "Based on this description: '{prev}', rewrite and expand it to describe the main action or placement of the object. The total length must be between 10 and 30 tokens.",
         "max_new": 30
     },
     {
-        "name": "20-30_tokens",
-        "instruction": "Based on this description: '{prev}', rewrite and expand it to include details about the object's color and physical features. The total length must be between 20 and 30 words.",
-        "max_new": 45
-    },
-    {
-        "name": "30-40_tokens",
-        "instruction": "Based on this description: '{prev}', rewrite and expand it to describe specific parts (like wheels, legs, or surface). The total length must be between 30 and 40 words.",
-        "max_new": 60
-    },
-    {
-        "name": "40-50_tokens",
-        "instruction": "Based on this description: '{prev}', rewrite and expand it to elaborate on the background environment and lighting. The total length must be between 40 and 50 words.",
+        "name": "30-75_tokens",
+        "instruction": "Based on this description: '{prev}', rewrite and expand it to elaborate on the background environment and lighting. The total length must be between 30 and 75 tokens.",
         "max_new": 75
-    },
-    {
-        "name": "50-75_tokens",
-        "instruction": "Based on this description: '{prev}', rewrite and create a comprehensive visual description covering the object, details, background, and atmosphere. The total length must be between 50 and 75 words.",
-        "max_new": 100
     }
 ]
 

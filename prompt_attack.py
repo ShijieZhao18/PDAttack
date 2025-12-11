@@ -358,7 +358,7 @@ def diffattack(
     pred = classifier(test_image.cuda())
     _, pred_labels = pred.topk(topN, largest=True, sorted=True)
 
-    with open('Prompts/00-10_tokens.txt', 'r') as file:
+    with open('Prompts/02-10_tokens.txt', 'r') as file:
         descriptions = file.readlines()
 
     _, pred_labels = pred.topk(topN, largest=True, sorted=True)

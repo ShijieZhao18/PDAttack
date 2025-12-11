@@ -22,11 +22,9 @@ def load_model(name):
     elif name == "swin-b":
         model = models.swin_b(weights=models.Swin_B_Weights.IMAGENET1K_V1)
     elif name == "deit_base_patch16_224":
-        model = timm.create_model(name, pretrained=False)
-        model.load_state_dict(torch.load('tools/models/deit_base_patch16_224.pth', weights_only=True))
+        model = timm.create_model('deit_base_patch16_224', pretrained=True)
     elif name == "cait_s24_224":
-        model = timm.create_model(name, pretrained=False)
-        model.load_state_dict(torch.load('tools/models/cait_s24_224.pth', weights_only=True))
+        model = timm.create_model('cait_s24_224', pretrained=True)
     elif name == 'cubResnet50':
         model = otherModel.CUB()[0]
     elif name == 'cubSEResnet154':
